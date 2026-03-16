@@ -1,64 +1,89 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { supabase } from "@/lib/supabase"
 
-export default function AuthForm(){
+export default function AuthForm() {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [loading, setLoading] = useState(false)
+  const router = useRouter()
 
-  const [email,setEmail] = useState("")
-  const [password,setPassword] = useState("")
+  const login = async () => {
+    setLoading(true)
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
 
-  const login = async()=>{
-
-    await supabase.auth.signInWithPassword({
-      email,
-      password
-    })
-
-    alert("Login success")
+      if (error) {
+        alert("Login failed: " + error.message)
+      } else {
+        alert("Login success!")
+        router.push("/")
+        router.refresh()
+      }
+    } catch (err: any) {
+      alert("An unexpected error occurred")
+    } finally {
+      setLoading(false)
+    }
   }
 
-  const signup = async()=>{
+  const signup = async () => {
+    setLoading(true)
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+      })
 
-    await supabase.auth.signUp({
-      email,
-      password
-    })
-
-    alert("Signup success")
+      if (error) {
+        alert("Signup failed: " + error.message)
+      } else {
+        alert("Signup success! Please check your email for verification.")
+      }
+    } catch (err: any) {
+      alert("An unexpected error occurred")
+    } finally {
+      setLoading(false)
+    }
   }
 
-  return(
-
-    <div className="max-w-md mx-auto">
-
+  return (
+    <div className="max-w-md mx-auto space-y-4">
       <input
         placeholder="Email"
-        className="border p-2 w-full"
-        onChange={(e)=>setEmail(e.target.value)}
+        className="border p-2 w-full rounded"
+        onChange={(e) => setEmail(e.target.value)}
+        disabled={loading}
       />
 
       <input
         type="password"
         placeholder="Password"
-        className="border p-2 w-full mt-2"
-        onChange={(e)=>setPassword(e.target.value)}
+        className="border p-2 w-full rounded"
+        onChange={(e) => setPassword(e.target.value)}
+        disabled={loading}
       />
 
       <button
         onClick={login}
-        className="bg-blue-500 text-white p-2 w-full mt-3"
+        disabled={loading}
+        className="bg-blue-500 hover:bg-blue-600 text-white p-2 w-full rounded transition-colors"
       >
-        Login
+        {loading ? "Logging in..." : "Login"}
       </button>
 
       <button
         onClick={signup}
-        className="bg-green-500 text-white p-2 w-full mt-2"
+        disabled={loading}
+        className="bg-green-500 hover:bg-green-600 text-white p-2 w-full rounded transition-colors"
       >
-        Sign Up
+        {loading ? "Signing up..." : "Sign Up"}
       </button>
-
     </div>
   )
 }
