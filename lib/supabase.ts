@@ -1,12 +1,14 @@
 import { createClient } from "@supabase/supabase-js"
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ""
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ""
+const supabaseUrl = (process.env.NEXT_PUBLIC_SUPABASE_URL || "").trim()
+const supabaseKey = (process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "").trim()
 
-// Khởi tạo client an toàn: Nếu thiếu URL sẽ dùng URL giả để không sập Build
-// Nhưng sẽ báo lỗi trong Console để bạn biết
-const isConfigured = supabaseUrl.startsWith("https://") && supabaseKey.length > 0
+// Log để kiểm tra (chỉ hiện URL, không hiện Key để bảo mật)
+if (typeof window !== "undefined") {
+  console.log("Supabase URL initialized with:", supabaseUrl || "MISSING")
+}
 
-export const supabase = isConfigured 
-  ? createClient(supabaseUrl, supabaseKey)
-  : createClient("https://missing-config.supabase.co", "missing-key")
+export const supabase = createClient(
+  supabaseUrl || "https://placeholder-missing-url.supabase.co",
+  supabaseKey || "missing-key"
+)
