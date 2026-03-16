@@ -1,5 +1,5 @@
 "use client"
-// Build sync: applying new environment variables
+// Build sync: final check for environment variables
 
 import { useCart } from "@/context/CartContext"
 import { useState } from "react"
