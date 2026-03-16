@@ -3,7 +3,15 @@
 import { Calendar, Package, ChevronRight } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 
-export default function OrderCard({ order }: any) {
+interface Order {
+  id: string
+  created_at: string
+  status: string
+  total_price: number
+  items?: any[]
+}
+
+export default function OrderCard({ order }: { order: Order }) {
   const date = new Date(order.created_at).toLocaleDateString('en-US', {
     month: 'long',
     day: 'numeric',

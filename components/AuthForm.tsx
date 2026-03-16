@@ -13,7 +13,7 @@ export default function AuthForm() {
   const login = async () => {
     setLoading(true)
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
       })
@@ -35,7 +35,7 @@ export default function AuthForm() {
   const signup = async () => {
     setLoading(true)
     try {
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email,
         password,
       })

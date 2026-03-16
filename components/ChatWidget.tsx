@@ -7,9 +7,11 @@ import { supabase } from "@/lib/supabase"
 import ChatInterface from "./ChatInterface"
 import { motion, AnimatePresence } from "framer-motion"
 
+import { User } from "@supabase/supabase-js"
+
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false)
-  const [user, setUser] = useState<any>(null)
+  const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {
     // Check active session on mount

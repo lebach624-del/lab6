@@ -19,7 +19,7 @@ export default function Login() {
         </div>
 
         <p className="text-center text-sm text-muted-foreground">
-          Don't have an account? No worries, you can sign up above.
+          Don&apos;t have an account? No worries, you can sign up above.
         </p>
       </div>
     </div>

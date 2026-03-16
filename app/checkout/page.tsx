@@ -70,7 +70,7 @@ export default function CheckoutPage() {
           </div>
           <h1 className="text-4xl font-bold tracking-tight">Order Placed!</h1>
           <p className="text-muted-foreground text-lg max-w-sm mx-auto">
-            Thank you for your purchase. We've received your order and are processing it now.
+            Thank you for your purchase. We&apos;ve received your order and are processing it now.
           </p>
           <div className="pt-8">
             <Link href="/orders">

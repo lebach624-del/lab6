@@ -2,11 +2,11 @@
 
 import Link from "next/link"
 import { ShoppingBag, Apple } from "lucide-react"
-import { useCart } from "@/context/CartContext"
+import { useCart, CartItem } from "@/context/CartContext"
 
 export default function Header() {
   const { cart } = useCart()
-  const totalItems = cart.reduce((acc: number, item: any) => acc + item.quantity, 0)
+  const totalItems = cart.reduce((acc: number, item: CartItem) => acc + item.quantity, 0)
 
   return (
     <header className="sticky top-0 z-40 w-full glass">

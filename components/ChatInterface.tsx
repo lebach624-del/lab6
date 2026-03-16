@@ -15,7 +15,7 @@ type Message = {
   created_at: string;
 }
 
-export default function ChatInterface({ user }: { user: any }) {
+export default function ChatInterface({ user }: { user: { id: string } }) {
   const [messages, setMessages] = useState<Message[]>([])
   const [newMessage, setNewMessage] = useState("")
   const [isTyping, setIsTyping] = useState(false)

@@ -5,7 +5,14 @@ import { useCart } from "@/context/CartContext"
 import { Button } from "./ui/button"
 import { ShoppingCart, Plus, Minus } from "lucide-react"
 
-export default function ProductCard({ product }: any) {
+interface Product {
+  id: string | number
+  name: string
+  price: number
+  img: string
+}
+
+export default function ProductCard({ product }: { product: Product }) {
   const [qty, setQty] = useState(1)
   const { addToCart } = useCart()
 

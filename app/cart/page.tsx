@@ -1,6 +1,6 @@
 "use client"
 
-import { useCart } from "@/context/CartContext"
+import { useCart, CartItem } from "@/context/CartContext"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { ShoppingBag, ArrowLeft, Trash2, Plus, Minus, CreditCard } from "lucide-react"
@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 export default function CartPage() {
   const { cart, removeFromCart, addToCart } = useCart()
 
-  const total = cart.reduce((sum: number, item: any) => {
+  const total = cart.reduce((sum: number, item: CartItem) => {
     const price = Number(item.price)
     const qty = Number(item.quantity || 1)
     return sum + price * qty
@@ -40,7 +40,7 @@ export default function CartPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             <div className="lg:col-span-2 space-y-6">
               <AnimatePresence>
-                {cart.map((item: any, index: number) => {
+                {cart.map((item: CartItem) => {
                   const price = Number(item.price)
                   const qty = Number(item.quantity || 1)
                   
