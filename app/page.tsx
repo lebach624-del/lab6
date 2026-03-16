@@ -1,4 +1,5 @@
 "use client"
+// Trigger build after env vars update
 
 import { useCart } from "@/context/CartContext"
 import { useState } from "react"
